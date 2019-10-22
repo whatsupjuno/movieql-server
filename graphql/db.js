@@ -1,23 +1,38 @@
-import fetch from "node-fetch";
+import mariadb from "mariadb"
 
-const API_URL = "https://yts.am/api/v2/list_movies.json?";
+export const pool = mariadb.createPool({
+    host: "localhost",
+    user: "root",
+    password: "root",
+    database: "apgqlsrv1mariadb"
+})
 
-export const getMovies = (rating, limit) => {
+export const getMovies = async () => {
+  const conn = await pool.getConnection()
+  return (await conn.query(`SELECT * FROM movieql`))[0]
+}
 
-    let REQUEST_URL = API_URL
 
-    if(limit > 0) {
-        REQUEST_URL += `limit=${limit}`
-    }
+// import fetch from "node-fetch";
 
-    if(rating > 0) {
-        REQUEST_URL += `&minimum_rating=${rating}`
-    }
+// const API_URL = "https://yts.am/api/v2/list_movies.json?";
 
-    return fetch(REQUEST_URL)
-      .then(res => res.json())
-      .then(json => json.data.movies);
-  };
+// export const getMovies = (rating, limit) => {
+
+//     let REQUEST_URL = API_URL
+
+//     if(limit > 0) {
+//         REQUEST_URL += `limit=${limit}`
+//     }
+
+//     if(rating > 0) {
+//         REQUEST_URL += `&minimum_rating=${rating}`
+//     }
+
+//     return fetch(REQUEST_URL)
+//       .then(res => res.json())
+//       .then(json => json.data.movies);
+//   };
 
 // let movies = [
 //     {
