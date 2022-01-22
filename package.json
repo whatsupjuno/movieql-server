@@ -7,7 +7,7 @@
     "global": "^4.4.0",
     "graphql-yoga": "^1.18.3",
     "mariadb": "^2.1.2",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "nodemon": "^1.19.4",
     "yarn": "^1.19.1"
   },
